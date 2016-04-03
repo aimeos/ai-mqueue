@@ -13,15 +13,36 @@ class StompTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testProcess()
+	{
+		try
+		{
+			$config = array( 'username' => 'guest', 'password' => 'guest' );
+			$mqueue = new \Aimeos\MW\MQueue\Stomp( $config );
+			$queue = $mqueue->getQueue( 'aimeos_unittest' );
+		}
+		catch( \Aimeos\MW\MQueue\Exception $e )
+		{
+			$this->markTestSkipped( 'No Stomp compliant server available at "localhost"' );
+		}
+
+		$queue->add( 'testmsg' );
+		$msg = $queue->get();
+		$queue->del( $msg );
+
+		$this->assertNull( $queue->get() );
+	}
+
+
 	public function testGetQueueSingleConnection()
 	{
-		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'localhost' ) );
+		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
 	}
 
 
 	public function testGetQueueMultiConnection()
 	{
-		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => array( 'localhost', '127.0.0.1' ) ) );
+		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => array( 'tcp://127.0.0.1:61616', 'tcp://127.0.0.1:61617' ) ) );
 	}
 
 

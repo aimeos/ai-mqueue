@@ -72,13 +72,9 @@ class AMQP implements Iface
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
 	{
-		try
-		{
-			$info = $msg->getObject()->delivery_info;
-			$info['channel']->basic_ack( $info['delivery_tag'] );
-		}
-		catch( \Exception $e )
-		{
+		try {
+			$this->channel->basic_ack( $msg->getObject()->delivery_info['delivery_tag'] );
+		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
 	}

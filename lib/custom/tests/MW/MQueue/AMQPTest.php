@@ -13,17 +13,37 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testProcess()
+	{
+		try
+		{
+			$mqueue = new \Aimeos\MW\MQueue\AMQP( array( 'host' => 'localhost' ) );
+			$queue = $mqueue->getQueue( 'aimeos_unittest' );
+		}
+		catch( \Aimeos\MW\MQueue\Exception $e )
+		{
+			$this->markTestSkipped( 'No AMQP compliant server available at "localhost"' );
+		}
+
+		$queue->add( 'testmsg' );
+		$msg = $queue->get();
+		$queue->del( $msg );
+
+		$this->assertNull( $queue->get() );
+	}
+
+
 	public function testSingleConnection()
 	{
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
-		new \Aimeos\MW\MQueue\AMQP( array( 'host' => 'localhost' ) );
+		new \Aimeos\MW\MQueue\AMQP( array( 'host' => '192.168.255.255', 'connection_timeout' => 0.1 ) );
 	}
 
 
 	public function testMultiConnection()
 	{
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
-		new \Aimeos\MW\MQueue\AMQP( array( 'host' => array( 'localhost', '127.0.0.1' ) ) );
+		new \Aimeos\MW\MQueue\AMQP( array( 'host' => array( '192.168.254.255', '192.168.255.255' ), 'connection_timeout' => 0.1 ) );
 	}
 
 
