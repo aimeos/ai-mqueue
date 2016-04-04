@@ -1,0 +1,3 @@
+src_dir: ext/ai-mqueue
+json_path: ext/ai-mqueue/coveralls.json
+coverage_clover: ext/ai-mqueue/lib/custom/tests/coverage.xml
