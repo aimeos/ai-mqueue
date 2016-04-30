@@ -7,8 +7,8 @@ class StompTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
-		if( class_exists( '\Stomp' ) === false ) {
-			$this->markTestSkipped( 'Please install the "stomp" PHP extension first' );
+		if( class_exists( '\Stomp\Stomp' ) === false ) {
+			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
 		}
 	}
 
@@ -34,21 +34,18 @@ class StompTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetQueueSingleConnection()
+	public function testGetQueueException()
 	{
 		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
-	}
 
-
-	public function testGetQueueMultiConnection()
-	{
-		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => array( 'tcp://127.0.0.1:61616', 'tcp://127.0.0.1:61617' ) ) );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$object->getQueue( 'test' );
 	}
 
 
 	public function testGetQueue()
 	{
-		$client = $this->getMockBuilder( '\Stomp' )
+		$client = $this->getMockBuilder( '\Stomp\Stomp' )
 			->disableOriginalConstructor()
 			->getMock();
 

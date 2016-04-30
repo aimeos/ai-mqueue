@@ -10,6 +10,11 @@
 		"php": ">=5.3.3",
 		"composer/installers": "^1.0"
 	},
+	"suggest": {
+		"php-amqplib/php-amqplib": "AMQP message queue client for RabbitMQ, etc", 
+		"pda/pheanstalk": "Beanstalk message queue client",
+		"stomp-php/stomp-php": "Stomp message queue client"
+	},
 	"autoload": {
 		"psr-4": {
 			"Aimeos\\MW\\": "lib/mwlib/src/MW/"

@@ -11,9 +11,9 @@ class Stomp implements Iface
 	/**
 	 * Initializes the message object
 	 *
-	 * @param \StompFrame $msg Stomp frame object
+	 * @param \Stomp\Message $msg Stomp message object
 	 */
-	public function __construct( \StompFrame $msg )
+	public function __construct( \Stomp\Message $msg )
 	{
 		$this->msg = $msg;
 	}

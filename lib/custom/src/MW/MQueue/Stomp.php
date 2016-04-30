@@ -18,34 +18,13 @@ class Stomp extends Base implements Iface
 	{
 		if( !isset( $this->queues[$name] ) )
 		{
-			$uri = $this->getConfig( 'uri', 'tcp://localhost:61613' );
-			$user = $this->getConfig( 'username', null );
-			$pass = $this->getConfig( 'password', null );
-
-			if( is_array( $uri ) )
-			{
-				foreach( $uri as $idx => $entry )
-				{
-					$iuser = ( is_array( $user) ? $user[$idx] : $user );
-					$ipass = ( is_array( $pass) ? $pass[$idx] : $pass );
-
-					$result = $this->connect( $entry, $iuser, $ipass );
-
-					if( $result instanceof \Stomp ) {
-						break;
-					}
-				}
-			}
-			else
-			{
-				$result = $this->connect( $uri, $user, $pass );
+			try {
+				$client = $this->connect();
+			} catch( \Exception $e ) {
+				throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 			}
 
-			if( $result instanceof \StompException ) {
-				throw new \Aimeos\MW\MQueue\Exception( $result->getMessage() );
-			}
-
-			$this->queues[$name] = new \Aimeos\MW\MQueue\Queue\Stomp( $result, $name );
+			$this->queues[$name] = new \Aimeos\MW\MQueue\Queue\Stomp( $client, $name );
 		}
 
 		return $this->queues[$name];
@@ -53,19 +32,19 @@ class Stomp extends Base implements Iface
 
 
 	/**
-	 * Opens a connection to the message queue server
+	 * Creates a connection to the Stomp server
 	 *
-	 * @param string $uri Connection URI
-	 * @param string $user User name for authentication
-	 * @param string $pass Password for authentication
-	 * @return \Stomp|\StompException
+	 * @return \Stomp\Stomp Stomp client
 	 */
-	protected function connect( $uri, $user, $pass )
+	protected function connect()
 	{
-		try {
-			return new \Stomp( $uri, $user, $pass );
-		} catch( \StompException $e ) {
-			return $e;
-		}
+		$uri = $this->getConfig( 'uri', 'tcp://localhost:61613' );
+		$user = $this->getConfig( 'username', null );
+		$pass = $this->getConfig( 'password', null );
+
+		$stomp = new \Stomp\Stomp( $uri );
+		$stomp->connect( $user, $pass );
+
+		return $stomp;
 	}
 }

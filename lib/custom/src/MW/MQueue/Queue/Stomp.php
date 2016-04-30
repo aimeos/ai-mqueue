@@ -12,14 +12,14 @@ class Stomp implements Iface
 	/**
 	 * Initializes the message queue class
 	 *
-	 * @param \Stomp $client Stomp object
+	 * @param \Stomp\Stomp $client Stomp object
 	 * @param string $queue Message queue name
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function __construct( \Stomp $client, $queue )
+	public function __construct( \Stomp\Stomp $client, $queue )
 	{
 		if( $client->subscribe( $queue ) === false ) {
-			throw new \Aimeos\MW\MQueue\Exception( $client->error() );
+			throw new \Aimeos\MW\MQueue\Exception( sprintf( 'Unable to subscribe to queue "%1$s"', $queue ) );
 		}
 
 		$this->client = $client;
@@ -44,8 +44,10 @@ class Stomp implements Iface
 	 */
 	public function add( $msg )
 	{
-		if( $this->client->send( $this->queue, $msg ) === false ) {
-			throw new \Aimeos\MW\MQueue\Exception( $this->client->error() );
+		if( $this->client->send( $this->queue, $msg ) === false )
+		{
+			$msg = sprintf( 'Sending message to queue "%1$s" failed: ' . $msg, $this->queue );
+			throw new \Aimeos\MW\MQueue\Exception( $msg );
 		}
 	}
 
@@ -59,7 +61,7 @@ class Stomp implements Iface
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
 	{
 		if( $this->client->ack( $msg->getObject() ) === false ) {
-			throw new \Aimeos\MW\MQueue\Exception( $this->client->error() );
+			throw new \Aimeos\MW\MQueue\Exception( 'Couldn\'t acknowledge frame: ' . $msg->getBody() );
 		}
 	}
 
@@ -68,17 +70,16 @@ class Stomp implements Iface
 	 * Returns the next message from the queue
 	 *
 	 * @return \Aimeos\MW\MQueue\Message\Iface|null Message object or null if none is available
-	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
 	public function get()
 	{
 		try
 		{
-			if( $this->client->hasFrame() ) {
-				return new \Aimeos\MW\MQueue\Message\Stomp( $this->client->readFrame() );
+			if( $this->client->hasFrameToRead() && ( $msg = $this->client->readFrame() ) !== false  ) {
+				return new \Aimeos\MW\MQueue\Message\Stomp( $msg );
 			}
 		}
-		catch( \StompException $e )
+		catch( \Exception $e )
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}

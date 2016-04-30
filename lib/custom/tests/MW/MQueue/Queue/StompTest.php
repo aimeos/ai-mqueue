@@ -11,12 +11,12 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		if( class_exists( '\Stomp' ) === false ) {
-			$this->markTestSkipped( 'Please install the "Stomp" PHP extension first' );
+		if( class_exists( '\Stomp\Stomp' ) === false ) {
+			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\Stomp' )
-			->setMethods( array( 'subscribe', 'unsubscribe', 'send', 'ack', 'hasFrame', 'readFrame', 'error', '__destruct' ) )
+		$this->mock = $this->getMockBuilder( '\Stomp\Stomp' )
+			->setMethods( array( 'subscribe', 'unsubscribe', 'send', 'ack', 'hasFrameToRead', 'readFrame', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -34,9 +34,6 @@ class StompTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'subscribe' )
 			->will( $this->returnValue( false ) );
-
-		$this->mock->expects( $this->once() )->method( 'error' )
-			->will( $this->returnValue( 'exception' ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\Queue\Stomp( $this->mock, 'test' );
@@ -56,9 +53,6 @@ class StompTest extends \PHPUnit_Framework_TestCase
 		$this->mock->expects( $this->once() )->method( 'send' )
 			->will( $this->returnValue( false ) );
 
-		$this->mock->expects( $this->once() )->method( 'error' )
-			->will( $this->returnValue( 'exception' ) );
-
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->add( 'test' );
 	}
@@ -66,7 +60,7 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testDel()
 	{
-		$msg = new \StompFrame( 'COMMAND', array(), 'test' );
+		$msg = new \Stomp\Message( 'test' );
 		$message = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'ack' );
@@ -77,7 +71,7 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testDelException()
 	{
-		$msg = new \StompFrame( 'COMMAND', array(), 'test' );
+		$msg = new \Stomp\Message( 'test' );
 		$message = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'ack' )
@@ -90,9 +84,9 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testGet()
 	{
-		$msg = new \StompFrame( 'test' );
+		$msg = new \Stomp\Message( 'test' );
 
-		$this->mock->expects( $this->once() )->method( 'hasFrame' )
+		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
 			->will( $this->returnValue( true ) );
 
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
@@ -104,7 +98,7 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetNone()
 	{
-		$this->mock->expects( $this->once() )->method( 'hasFrame' )
+		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
 			->will( $this->returnValue( false ) );
 
 		$this->assertNull( $this->object->get() );
@@ -113,11 +107,11 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetException()
 	{
-		$this->mock->expects( $this->once() )->method( 'hasFrame' )
+		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
 			->will( $this->returnValue( true ) );
 
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
-			->will( $this->throwException( new \StompException() ) );
+			->will( $this->throwException( new \Exception() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->get();

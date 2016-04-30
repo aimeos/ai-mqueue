@@ -10,11 +10,11 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		if( class_exists( '\StompFrame' ) === false ) {
-			$this->markTestSkipped( 'Please install the Stomp PHP extension first' );
+		if( class_exists( '\Stomp\Message' ) === false ) {
+			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
 		}
 
-		$msg = new \StompFrame( 'COMMAND', array(), 'test' );
+		$msg = new \Stomp\Message( 'test' );
 		$this->object = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
 	}
 
@@ -33,6 +33,6 @@ class StompTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetObject()
 	{
-		$this->assertInstanceOf( '\StompFrame', $this->object->getObject() );
+		$this->assertInstanceOf( '\Stomp\Message', $this->object->getObject() );
 	}
 }
