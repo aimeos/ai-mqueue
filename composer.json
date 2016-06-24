@@ -2,8 +2,15 @@
 	"name": "aimeos/ai-mqueue",
 	"description": "Aimeos ai-mqueue extension",
 	"keywords": ["aimeos", "extension", "message queue", "aqmp", "rabbitmq", "beanstalk", "stomp"],
+	"homepage": "https://aimeos.org/",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
+	"support": {
+		"source": "https://github.com/aimeos/ai-mqueue",
+		"issues": "https://github.com/aimeos/ai-mqueue/issues",
+		"forum": "https://aimeos.org/help",
+		"wiki": "https://aimeos.org/docs"
+	},
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
