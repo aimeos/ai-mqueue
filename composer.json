@@ -15,10 +15,11 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.3.3",
-		"composer/installers": "^1.0"
+		"composer/installers": "^1.0",
+		"aimeos/aimeos-core": "dev-master"
 	},
 	"suggest": {
-		"php-amqplib/php-amqplib": "AMQP message queue client for RabbitMQ, etc", 
+		"php-amqplib/php-amqplib": "AMQP message queue client for RabbitMQ, etc",
 		"pda/pheanstalk": "Beanstalk message queue client",
 		"stomp-php/stomp-php": "Stomp message queue client"
 	},
