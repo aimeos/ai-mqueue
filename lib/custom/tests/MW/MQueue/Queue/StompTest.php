@@ -111,7 +111,7 @@ class StompTest extends \PHPUnit_Framework_TestCase
 			->will( $this->returnValue( true ) );
 
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->get();

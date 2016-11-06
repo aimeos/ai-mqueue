@@ -33,7 +33,7 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 	public function testConstructorException()
 	{
 		$this->mock->expects( $this->once() )->method( 'queue_declare' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\Queue\AMQP( $this->mock, 'test' );
@@ -51,7 +51,7 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 	public function testAddException()
 	{
 		$this->mock->expects( $this->once() )->method( 'basic_publish' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->add( 'test' );
@@ -79,7 +79,7 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 		$message = new \Aimeos\MW\MQueue\Message\AMQP( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'basic_ack' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->del( $message );
@@ -109,7 +109,7 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 	public function testGetException()
 	{
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->get();

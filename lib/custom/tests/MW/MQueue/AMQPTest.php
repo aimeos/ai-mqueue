@@ -73,7 +73,7 @@ class AMQPTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getChannel' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$object->getQueue( 'test' );
