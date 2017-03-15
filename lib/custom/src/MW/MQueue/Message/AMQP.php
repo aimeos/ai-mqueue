@@ -26,7 +26,7 @@ class AMQP implements Iface
 	 */
 	public function getBody()
 	{
-		return $this->msg->getBody();
+		return $this->msg->body;
 	}
 
 
