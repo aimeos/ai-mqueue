@@ -11,7 +11,7 @@ php:
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y rabbitmq-server beanstalkd
+  - sudo apt-get install -y beanstalkd rabbitmq-server=3.2.4-1
 
 before_script:
   - cat /etc/issue
