@@ -6,7 +6,7 @@ namespace Aimeos\MW\MQueue;
 class Beanstalk extends Base implements Iface
 {
 	private $client;
-	private $queues = array();
+	private $queues = [];
 
 
 	/**
