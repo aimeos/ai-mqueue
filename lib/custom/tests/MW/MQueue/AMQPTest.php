@@ -3,7 +3,7 @@
 namespace Aimeos\MW\MQueue;
 
 
-class AMQPTest extends \PHPUnit_Framework_TestCase
+class AMQPTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

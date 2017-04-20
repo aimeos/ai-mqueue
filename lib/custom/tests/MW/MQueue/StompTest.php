@@ -3,7 +3,7 @@
 namespace Aimeos\MW\MQueue;
 
 
-class StompTest extends \PHPUnit_Framework_TestCase
+class StompTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

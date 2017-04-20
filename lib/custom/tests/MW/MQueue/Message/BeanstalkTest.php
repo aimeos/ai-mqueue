@@ -3,7 +3,7 @@
 namespace Aimeos\MW\MQueue\Message;
 
 
-class BeanstalkTest extends \PHPUnit_Framework_TestCase
+class BeanstalkTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

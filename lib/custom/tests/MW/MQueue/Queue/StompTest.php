@@ -3,7 +3,7 @@
 namespace Aimeos\MW\MQueue\Queue;
 
 
-class StompTest extends \PHPUnit_Framework_TestCase
+class StompTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;
