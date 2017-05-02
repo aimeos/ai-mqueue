@@ -52,7 +52,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
 		$object->getQueue( 'test' );
 	}
 }

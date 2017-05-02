@@ -35,7 +35,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'subscribe' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\Queue\Stomp( $this->mock, 'test' );
 	}
 
@@ -53,7 +53,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'send' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->add( 'test' );
 	}
 
@@ -77,7 +77,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'ack' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->del( $message );
 	}
 
@@ -113,7 +113,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->get();
 	}
 }
