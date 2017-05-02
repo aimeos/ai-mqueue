@@ -38,7 +38,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
 
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$object->getQueue( 'test' );
 	}
 

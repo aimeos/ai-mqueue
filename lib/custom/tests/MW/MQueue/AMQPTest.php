@@ -35,14 +35,14 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 
 	public function testSingleConnection()
 	{
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\AMQP( array( 'host' => '192.168.255.255', 'connection_timeout' => 0.1 ) );
 	}
 
 
 	public function testMultiConnection()
 	{
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\AMQP( array( 'host' => array( '192.168.254.255', '192.168.255.255' ), 'connection_timeout' => 0.1 ) );
 	}
 
@@ -75,7 +75,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getChannel' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$object->getQueue( 'test' );
 	}
 }

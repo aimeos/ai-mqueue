@@ -38,7 +38,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'watch' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		new \Aimeos\MW\MQueue\Queue\Beanstalk( $this->mock, 'test' );
 	}
 
@@ -56,7 +56,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->add( 'test' );
 	}
 
@@ -80,7 +80,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'delete' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
 		$this->object->del( $message );
 	}
 
