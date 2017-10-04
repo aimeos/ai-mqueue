@@ -33,7 +33,7 @@ Add the ai-mqueue extension name to the "require" section of your ```composer.js
 (or your ```composer.aimeos.json```, depending on what is available) file:
 ```
 "require": [
-    "aimeos/ai-mqueue": "dev-master",
+    "aimeos/ai-mqueue": "~2017.10",
     ...
 ],
 ```
@@ -81,7 +81,7 @@ library:
 	'vhost' => '/', // optional
 	'insist' => false, // optional
 	'login_method' => 'AMQPLAIN', // optional
-	'login_response' => null, // optional	
+	'login_response' => null, // optional
 	'locale' => 'en_US', // optional
 	'connection_timeout' => 3.0, // optional
 	'read_write_timeout' => 3.0, // optional
@@ -118,7 +118,7 @@ library:
 
 To use the Stomp adapter, make sure you've installed the "stomp" PHP extension.
 Most of the time there's already a package for the most widely used Linux
-distributions available.  
+distributions available.
 
 The available configuration options are:
 ```
