@@ -7,6 +7,7 @@ Aimeos file system extension
 [![Build Status](https://travis-ci.org/aimeos/ai-mqueue.svg?branch=master)](https://travis-ci.org/aimeos/ai-mqueue)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-mqueue/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-mqueue?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-mqueue/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-mqueue/?branch=master)
+[![License](https://poser.pugx.org/aimeos/ai-mqueue/license.svg)](https://packagist.org/packages/aimeos/ai-mqueue)
 
 The Aimeos message queue extension contains adapter for pushing and retrieving
 arbitrary messages to remote message queue servers to. Thus, processing of
@@ -81,7 +82,7 @@ library:
 	'vhost' => '/', // optional
 	'insist' => false, // optional
 	'login_method' => 'AMQPLAIN', // optional
-	'login_response' => null, // optional	
+	'login_response' => null, // optional
 	'locale' => 'en_US', // optional
 	'connection_timeout' => 3.0, // optional
 	'read_write_timeout' => 3.0, // optional
@@ -118,7 +119,7 @@ library:
 
 To use the Stomp adapter, make sure you've installed the "stomp" PHP extension.
 Most of the time there's already a package for the most widely used Linux
-distributions available.  
+distributions available.
 
 The available configuration options are:
 ```
