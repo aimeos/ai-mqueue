@@ -17,7 +17,7 @@ before_install:
   - sudo apt-get install -y --force-yes beanstalkd rabbitmq-server=3.5.7-1
 
 before_script:
-  - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+  - git clone --depth=50 --branch=2018.04 git://github.com/aimeos/aimeos-core.git ../aimeos-core
   - cd ../aimeos-core && mv ../ai-mqueue ext/
   - composer require "php-amqplib/php-amqplib:~2.0" "pda/pheanstalk:~3.0" "stomp-php/stomp-php:~3.0"
 
