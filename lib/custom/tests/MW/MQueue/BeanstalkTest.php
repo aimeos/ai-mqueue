@@ -36,7 +36,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	public function testSingleConnection()
 	{
 		$object = new \Aimeos\MW\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Iface::class, $object );
 	}
 
 
@@ -44,7 +44,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	{
 		$config = array( 'host' => array( '192.168.254.255', '192.168.255.255' ),  'conntimeout' => 1 );
 		$object = new \Aimeos\MW\MQueue\Beanstalk( $config );
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Iface::class, $object );
 	}
 
 
@@ -52,7 +52,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 }

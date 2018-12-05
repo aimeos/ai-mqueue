@@ -15,7 +15,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Please install the "pheanstalk" library via composer first' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\Pheanstalk\Pheanstalk' )
+		$this->mock = $this->getMockBuilder( \Pheanstalk\Pheanstalk::class )
 			->setMethods( array( 'useTube', 'watch', 'put', 'delete', 'reserve' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -38,7 +38,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'watch' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\Queue\Beanstalk( $this->mock, 'test' );
 	}
 
@@ -56,7 +56,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -80,7 +80,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'delete' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -92,7 +92,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'reserve' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 

@@ -15,7 +15,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Please install the "php-amqplib" library via composer first' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\PhpAmqpLib\Channel\AMQPChannel' )
+		$this->mock = $this->getMockBuilder( \PhpAmqpLib\Channel\AMQPChannel::class )
 			->setMethods( array( 'queue_declare', 'basic_qos', 'basic_publish', 'basic_get', 'basic_ack', 'close' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -35,7 +35,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'queue_declare' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\Queue\AMQP( $this->mock, 'test' );
 	}
 
@@ -53,7 +53,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_publish' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -81,7 +81,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_ack' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -93,7 +93,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 
@@ -111,7 +111,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->get();
 	}
 }

@@ -38,18 +38,18 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 
 
 	public function testGetQueue()
 	{
-		$client = $this->getMockBuilder( '\Stomp\Stomp' )
+		$client = $this->getMockBuilder( \Stomp\Stomp::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$object = $this->getMockBuilder( '\Aimeos\MW\MQueue\Stomp' )
+		$object = $this->getMockBuilder( \Aimeos\MW\MQueue\Stomp::class )
 			->setMethods( array( 'connect' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -57,6 +57,6 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'connect' )
 			->will( $this->returnValue( $client ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Queue\Iface', $object->getQueue( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
 	}
 }

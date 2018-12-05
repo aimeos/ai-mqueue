@@ -15,7 +15,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\Stomp\Stomp' )
+		$this->mock = $this->getMockBuilder( \Stomp\Stomp::class )
 			->setMethods( array( 'subscribe', 'unsubscribe', 'send', 'ack', 'hasFrameToRead', 'readFrame', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -35,7 +35,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'subscribe' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\Queue\Stomp( $this->mock, 'test' );
 	}
 
@@ -53,7 +53,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'send' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -77,7 +77,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'ack' )
 			->will( $this->returnValue( false ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -92,7 +92,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 
@@ -113,7 +113,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
+		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->get();
 	}
 }
