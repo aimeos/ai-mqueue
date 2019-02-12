@@ -75,7 +75,7 @@ class Stomp implements Iface
 	{
 		try
 		{
-			if( $this->client->hasFrameToRead() && ( $msg = $this->client->readFrame() ) !== false  ) {
+			if( $this->client->hasFrameToRead() && ( $msg = $this->client->readFrame() ) !== false ) {
 				return new \Aimeos\MW\MQueue\Message\Stomp( $msg );
 			}
 		}
