@@ -85,7 +85,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-mqueue:unittest' );
+		$ctx->setEditor( 'ai-mqueue:lib/custom' );
 
 		return $ctx;
 	}
