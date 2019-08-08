@@ -40,6 +40,7 @@ class Stomp implements Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
 	public function add( $msg )
@@ -49,6 +50,8 @@ class Stomp implements Iface
 			$msg = sprintf( 'Sending message to queue "%1$s" failed: ' . $msg, $this->queue );
 			throw new \Aimeos\MW\MQueue\Exception( $msg );
 		}
+
+		return $this;
 	}
 
 
@@ -56,6 +59,7 @@ class Stomp implements Iface
 	 * Removes the message from the queue
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
@@ -63,6 +67,8 @@ class Stomp implements Iface
 		if( $this->client->ack( $msg->getObject() ) === false ) {
 			throw new \Aimeos\MW\MQueue\Exception( 'Couldn\'t acknowledge frame: ' . $msg->getBody() );
 		}
+
+		return $this;
 	}
 
 

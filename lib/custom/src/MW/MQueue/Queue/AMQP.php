@@ -48,6 +48,7 @@ class AMQP implements Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
 	public function add( $msg )
@@ -61,6 +62,8 @@ class AMQP implements Iface
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return $this;
 	}
 
 
@@ -68,7 +71,7 @@ class AMQP implements Iface
 	 * Removes the message from the queue
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
-	 * @throws \Aimeos\MW\MQueue\Exception
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
 	{
@@ -77,6 +80,8 @@ class AMQP implements Iface
 		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return $this;
 	}
 
 
