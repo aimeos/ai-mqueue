@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Miro Sertić <miro.sertic0606@gmail.com>, 2018
+# Федір Вільгота <fredy31415@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -13,20 +13,20 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-03 10:00+0200\n"
 "PO-Revision-Date: 2017-10-02 17:09+0000\n"
-"Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>, 2018\n"
-"Language-Team: Croatian (https://www.transifex.com/aimeos/teams/39015/hr/)\n"
+"Last-Translator: Федір Вільгота <fredy31415@gmail.com>, 2019\n"
+"Language-Team: Ukrainian (https://www.transifex.com/aimeos/teams/39015/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 #: src/MW/MQueue/Queue/Stomp.php:50
 #, php-format
 msgid "Sending message to queue \"%1$s\" failed: "
-msgstr "Slanje poruke u red \"%1$s\" nije uspjelo:"
+msgstr "Відправка повідомлення до черги \"%1$s\" не вдалась: "
 
 #: src/MW/MQueue/Queue/Stomp.php:22
 #, php-format
 msgid "Unable to subscribe to queue \"%1$s\""
-msgstr "Nije moguće pretplatiti se na red \"%1$s\""
+msgstr "Неможливо підписатись на чергу \"%1$s\""
