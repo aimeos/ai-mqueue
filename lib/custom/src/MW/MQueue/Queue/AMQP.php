@@ -16,7 +16,7 @@ class AMQP implements Iface
 	 * @param string $queue Message queue name
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function __construct( \PhpAmqpLib\Channel\AMQPChannel $channel, $queue )
+	public function __construct( \PhpAmqpLib\Channel\AMQPChannel $channel, string $queue )
 	{
 		try
 		{
@@ -48,10 +48,10 @@ class AMQP implements Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
-	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function add( $msg )
+	public function add( string $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		try
 		{
@@ -71,9 +71,9 @@ class AMQP implements Iface
 	 * Removes the message from the queue
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
-	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 */
-	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
+	public function del( \Aimeos\MW\MQueue\Message\Iface $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		try {
 			$this->channel->basic_ack( $msg->getObject()->delivery_info['delivery_tag'] );
@@ -91,7 +91,7 @@ class AMQP implements Iface
 	 * @return \Aimeos\MW\MQueue\Message\Iface|null Message object or null if none is available
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function get()
+	public function get() : ?\Aimeos\MW\MQueue\Message\Iface
 	{
 		try
 		{
@@ -103,5 +103,7 @@ class AMQP implements Iface
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return null;
 	}
 }

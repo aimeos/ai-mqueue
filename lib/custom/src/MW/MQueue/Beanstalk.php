@@ -50,7 +50,7 @@ class Beanstalk extends Base implements Iface
 	 * @param string $name Queue name
 	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue
 	 */
-	public function getQueue( $name )
+	public function getQueue( string $name ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		if( !isset( $this->queues[$name] ) )
 		{
@@ -66,10 +66,10 @@ class Beanstalk extends Base implements Iface
 	 * Opens a connection to the message queue server
 	 *
 	 * @param string $host Host name or IP address
-	 * @param integer $port Port the server is listening
-	 * @return \Pheanstalk\PheanstalkInterface|\Pheanstalk\Exception
+	 * @param int $port Port the server is listening
+	 * @return \Pheanstalk\PheanstalkInterface
 	 */
-	protected function connect( $host, $port )
+	protected function connect( string $host, int $port ) : \Pheanstalk\PheanstalkInterface
 	{
 		$conntimeout = $this->getConfig( 'conntimeout', 3 );
 		$persist = $this->getConfig( 'persist', false );

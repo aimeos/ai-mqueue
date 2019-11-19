@@ -24,7 +24,7 @@ class Stomp implements Iface
 	 *
 	 * @return string Message body
 	 */
-	public function getBody()
+	public function getBody() : string
 	{
 		return $this->msg->body;
 	}
@@ -33,9 +33,9 @@ class Stomp implements Iface
 	/**
 	 * Returns the original message object
 	 *
-	 * @return \StompFrame Stomp frame object
+	 * @return \Stomp\Message Stomp message object
 	 */
-	public function getObject()
+	public function getObject() : \Stomp\Message
 	{
 		return $this->msg;
 	}

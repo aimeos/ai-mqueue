@@ -24,7 +24,7 @@ class Beanstalk implements Iface
 	 *
 	 * @return string Message body
 	 */
-	public function getBody()
+	public function getBody() : string
 	{
 		return $this->job->getData();
 	}
@@ -35,7 +35,7 @@ class Beanstalk implements Iface
 	 *
 	 * @return \Pheanstalk\Job Job object
 	 */
-	public function getObject()
+	public function getObject() : \Pheanstalk\Job
 	{
 		return $this->job;
 	}

@@ -16,7 +16,7 @@ class Stomp implements Iface
 	 * @param string $queue Message queue name
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function __construct( \Stomp\Stomp $client, $queue )
+	public function __construct( \Stomp\Stomp $client, string $queue )
 	{
 		if( $client->subscribe( $queue ) === false ) {
 			throw new \Aimeos\MW\MQueue\Exception( sprintf( 'Unable to subscribe to queue "%1$s"', $queue ) );
@@ -40,10 +40,10 @@ class Stomp implements Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
-	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function add( $msg )
+	public function add( string $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		if( $this->client->send( $this->queue, $msg ) === false )
 		{
@@ -62,7 +62,7 @@ class Stomp implements Iface
 	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 * @throws \Aimeos\MW\MQueue\Exception
 	 */
-	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
+	public function del( \Aimeos\MW\MQueue\Message\Iface $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		if( $this->client->ack( $msg->getObject() ) === false ) {
 			throw new \Aimeos\MW\MQueue\Exception( 'Couldn\'t acknowledge frame: ' . $msg->getBody() );
@@ -77,7 +77,7 @@ class Stomp implements Iface
 	 *
 	 * @return \Aimeos\MW\MQueue\Message\Iface|null Message object or null if none is available
 	 */
-	public function get()
+	public function get() : ?\Aimeos\MW\MQueue\Message\Iface
 	{
 		try
 		{
@@ -89,5 +89,7 @@ class Stomp implements Iface
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return null;
 	}
 }

@@ -64,7 +64,7 @@ class AMQP extends Base implements Iface
 	 * @param string $name Queue name
 	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue
 	 */
-	public function getQueue( $name )
+	public function getQueue( string $name ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		try
 		{
@@ -85,12 +85,12 @@ class AMQP extends Base implements Iface
 	 * Opens a connection to the message queue server
 	 *
 	 * @param string $host Host name or IP address
-	 * @param integer $port Port the server is listening
+	 * @param int $port Port the server is listening
 	 * @param string $user User name for authentication
 	 * @param string $pass Password for authentication
 	 * @return \PhpAmqpLib\Connection\AMQPStreamConnection|\PhpAmqpLib\Exception\AMQPException
 	 */
-	protected function connect( $host, $port, $user, $pass )
+	protected function connect( string $host, int $port, string $user, string $pass )
 	{
 		$vhost = $this->getConfig( 'vhost', '/' );
 		$insist = $this->getConfig( 'insist', false );

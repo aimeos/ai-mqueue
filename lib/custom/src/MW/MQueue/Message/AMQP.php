@@ -24,7 +24,7 @@ class AMQP implements Iface
 	 *
 	 * @return string Message body
 	 */
-	public function getBody()
+	public function getBody() : string
 	{
 		return $this->msg->body;
 	}
@@ -35,7 +35,7 @@ class AMQP implements Iface
 	 *
 	 * @return \PhpAmqpLib\Message\AMQPMessage AMQPMessage object
 	 */
-	public function getObject()
+	public function getObject() : \PhpAmqpLib\Message\AMQPMessage
 	{
 		return $this->msg;
 	}
