@@ -5,7 +5,7 @@ namespace Aimeos\MW\MQueue;
 
 class StompTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( class_exists( '\Stomp\Stomp' ) === false ) {
 			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
@@ -38,7 +38,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 

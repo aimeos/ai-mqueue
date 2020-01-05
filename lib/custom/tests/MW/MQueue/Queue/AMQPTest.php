@@ -9,7 +9,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( class_exists( '\PhpAmqpLib\Channel\AMQPChannel' ) === false ) {
 			$this->markTestSkipped( 'Please install the "php-amqplib" library via composer first' );
@@ -24,7 +24,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -35,7 +35,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'queue_declare' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\Queue\AMQP( $this->mock, 'test' );
 	}
 
@@ -53,7 +53,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_publish' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -81,7 +81,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_ack' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -111,7 +111,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		$this->object->get();
 	}
 }

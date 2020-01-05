@@ -5,7 +5,7 @@ namespace Aimeos\MW\MQueue;
 
 class AMQPTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( class_exists( '\PhpAmqpLib\Connection\AMQPStreamConnection' ) === false ) {
 			$this->markTestSkipped( 'Please install the "php-amqplib" library via composer first' );
@@ -35,14 +35,14 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 
 	public function testSingleConnection()
 	{
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\AMQP( array( 'host' => '192.168.255.255', 'connection_timeout' => 0.1 ) );
 	}
 
 
 	public function testMultiConnection()
 	{
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		new \Aimeos\MW\MQueue\AMQP( array( 'host' => array( '192.168.254.255', '192.168.255.255' ), 'connection_timeout' => 0.1 ) );
 	}
 
@@ -75,7 +75,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getChannel' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 }

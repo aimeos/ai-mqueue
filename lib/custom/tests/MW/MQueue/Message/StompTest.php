@@ -8,7 +8,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( class_exists( '\Stomp\Message' ) === false ) {
 			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
@@ -19,7 +19,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

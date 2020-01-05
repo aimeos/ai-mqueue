@@ -8,7 +8,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( class_exists( '\PhpAmqpLib\Message\AMQPMessage' ) === false ) {
 			$this->markTestSkipped( 'Please install the "php-amqplib" library via composer first' );
@@ -19,7 +19,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
