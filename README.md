@@ -34,7 +34,7 @@ Add the ai-mqueue extension name to the "require" section of your ```composer.js
 (or your ```composer.aimeos.json```, depending on what is available) file:
 ```
 "require": [
-    "aimeos/ai-mqueue": "dev-master",
+    "aimeos/ai-mqueue": "2020.04.*",
     ...
 ],
 ```
