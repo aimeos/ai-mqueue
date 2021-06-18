@@ -1,11 +1,11 @@
 <?php
 
-return array(
+return [
 	'name' => 'ai-mqueue',
-	'depends' => array(
+	'depends' => [
 		'aimeos-core',
-	),
-	'include' => array(
+	],
+	'include' => [
 		'lib/custom/src',
-	),
-);
+	],
+];
