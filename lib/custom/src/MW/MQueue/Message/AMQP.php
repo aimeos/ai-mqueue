@@ -35,7 +35,7 @@ class AMQP implements Iface
 	 *
 	 * @return \PhpAmqpLib\Message\AMQPMessage AMQPMessage object
 	 */
-	public function getObject() : \PhpAmqpLib\Message\AMQPMessage
+	public function object() : \PhpAmqpLib\Message\AMQPMessage
 	{
 		return $this->msg;
 	}

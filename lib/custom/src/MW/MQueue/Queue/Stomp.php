@@ -64,7 +64,7 @@ class Stomp implements Iface
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
-		if( $this->client->ack( $msg->getObject() ) === false ) {
+		if( $this->client->ack( $msg->object() ) === false ) {
 			throw new \Aimeos\MW\MQueue\Exception( 'Couldn\'t acknowledge frame: ' . $msg->getBody() );
 		}
 

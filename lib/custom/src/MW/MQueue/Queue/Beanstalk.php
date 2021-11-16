@@ -59,7 +59,7 @@ class Beanstalk implements Iface
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		try {
-			$this->client->delete( $msg->getObject() );
+			$this->client->delete( $msg->object() );
 		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}

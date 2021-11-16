@@ -35,7 +35,7 @@ class Beanstalk implements Iface
 	 *
 	 * @return \Pheanstalk\Job Job object
 	 */
-	public function getObject() : \Pheanstalk\Job
+	public function object() : \Pheanstalk\Job
 	{
 		return $this->job;
 	}

@@ -35,7 +35,7 @@ class Stomp implements Iface
 	 *
 	 * @return \Stomp\Message Stomp message object
 	 */
-	public function getObject() : \Stomp\Message
+	public function object() : \Stomp\Message
 	{
 		return $this->msg;
 	}
