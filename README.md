@@ -57,7 +57,7 @@ To use the AMQP adapter, add this line to the `require` section of your
 `composer.json` or (`composer.aimeos.json`) file:
 ```
 "require": [
-    "php-amqplib/php-amqplib": "~2.0",
+    "php-amqplib/php-amqplib": "~3.0",
     ...
 ],
 ```
