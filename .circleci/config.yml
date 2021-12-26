@@ -2,10 +2,10 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
+version: 2.1
 
 jobs:
-  "php-7.1":
+  "php-71":
     docker:
       - image: aimeos/ci-php:7.1
     steps:
@@ -23,7 +23,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue testext
 
-  "php-7.2":
+  "php-72":
     docker:
       - image: aimeos/ci-php:7.2
     steps:
@@ -41,7 +41,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue testext checkext
 
-  "php-7.3":
+  "php-73":
     docker:
       - image: aimeos/ci-php:7.3
     steps:
@@ -59,7 +59,7 @@ jobs:
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue testext
 
-  "php-7.4":
+  "php-74":
     docker:
       - image: aimeos/ci-php:7.4
     steps:
@@ -75,6 +75,42 @@ jobs:
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
           paths: [./vendor]
+      - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue testext
+
+  "php-80":
+    docker:
+      - image: aimeos/ci-php:8.0
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y beanstalkd rabbitmq-server
+      - checkout
+      - run: git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+      - run: cd .. && mv project aimeos-core/ext/ai-mqueue && mv aimeos-core project && cd project
+      - restore_cache:
+          keys:
+            - php80-{{ checksum "composer.json" }}
+      - run: composer req --no-update "php-amqplib/php-amqplib:~2.0" "pda/pheanstalk:~3.0" "stomp-php/stomp-php:~3.0"
+      - run: composer update -n --prefer-dist
+      - save_cache:
+          key: php80-{{ checksum "composer.json" }}
+          paths: [./vendor]
+      - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue testext
+
+  "php-81":
+    docker:
+      - image: aimeos/ci-php:8.1
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y beanstalkd rabbitmq-server
+      - checkout
+      - run: git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+      - run: cd .. && mv project aimeos-core/ext/ai-mqueue && mv aimeos-core project && cd project
+      - restore_cache:
+          keys:
+            - php81-{{ checksum "composer.json" }}
+      - run: composer req --no-update "php-amqplib/php-amqplib:~2.0" "pda/pheanstalk:~3.0" "stomp-php/stomp-php:~3.0"
+      - run: composer update -n --prefer-dist
+      - save_cache:
+          key: php81-{{ checksum "composer.json" }}
+          paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue coverageext
       - run: ./vendor/bin/php-coveralls -x ext/ai-mqueue/lib/custom/tests/coverage.xml -vvv
 
@@ -82,7 +118,9 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php-7.1"
-      - "php-7.2"
-      - "php-7.3"
-      - "php-7.4"
+      - "php-71"
+      - "php-72"
+      - "php-73"
+      - "php-74"
+      - "php-80"
+      - "php-81"
