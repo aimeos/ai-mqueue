@@ -1,2 +1,4 @@
 .phpunit.result.cache
-*.junit.xml
+coveralls.json
+coverage.xml
+*.log

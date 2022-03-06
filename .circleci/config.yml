@@ -112,7 +112,7 @@ jobs:
           key: php81-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: ./vendor/bin/phing -Ddir=ext/ai-mqueue coverageext
-      - run: ./vendor/bin/php-coveralls -x ext/ai-mqueue/lib/custom/tests/coverage.xml -vvv
+      - run: ./vendor/bin/php-coveralls --root_dir ext/ai-mqueue -o tests/coveralls.json -vvv -x tests/coverage.xml
 
 workflows:
   version: 2

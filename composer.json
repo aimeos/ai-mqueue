@@ -1,6 +1,6 @@
 {
 	"name": "aimeos/ai-mqueue",
-	"description": "Aimeos ai-mqueue extension",
+	"description": "Aimeos 3rd party message queue integration",
 	"keywords": ["aimeos", "extension", "message queue", "aqmp", "rabbitmq", "beanstalk", "stomp"],
 	"homepage": "https://aimeos.org/",
 	"type": "aimeos-extension",
@@ -27,10 +27,18 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Aimeos\\MW\\": "lib/mwlib/src/MW/"
+			"Aimeos\\": "src"
 		},
 		"classmap": [
-			"lib/custom/src"
+			"src"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Aimeos\\": "tests"
+		},
+		"classmap": [
+			"tests"
 		]
 	}
 }

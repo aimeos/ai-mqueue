@@ -44,11 +44,11 @@ These command will install the Aimeos extension into the extension directory and
 All message queue adapters are configured below the ```resource/mq``` configuration
 key, e.g. in the resource section of your config file:
 ```
-'resource' => array(
-	'mq' => array(
+'resource' => [
+	'mq' => [
 		// message queue adapter specific configuration
-	),
-),
+	],
+],
 ```
 
 ### AMQP (RabbitMQ, Azure, Apache ActiveMQ + Qpid, MQlight and others)
@@ -65,7 +65,7 @@ To use the AMQP adapter, add this line to the `require` section of your
 The available configuration options are the one offered by the  `php-amqplib`
 library:
 ```
-'mq' => array(
+'mq' => [
 	'adapter' => 'AMQP',
 	'host' => 'localhost', // optional
 	'port' => 5672, // optional
@@ -80,7 +80,7 @@ library:
 	'read_write_timeout' => 3.0, // optional
 	'keepalive' => false, // optional
 	'heartbeat' => 0, // optional
-),
+],
 ```
 
 ### Beanstalk
@@ -97,14 +97,14 @@ To use the Beanstalk adapter, add this line to the `require` section of your
 The available configuration options are the one offered by the  `pheanstalk`
 library:
 ```
-'mq' => array(
+'mq' => [
 	'adapter' => 'Beanstalk',
 	'host' => 'localhost', // optional
 	'port' => 11300, // optional
 	'conntimeout' => 3, // optional
 	'readtimeout' => 30, // optional
 	'persist' => false, // optional
-),
+],
 ```
 
 ### Stomp
@@ -115,12 +115,12 @@ distributions available.
 
 The available configuration options are:
 ```
-'mq' => array(
+'mq' => [
 	'adapter' => 'Stomp',
 	'uri' => 'tcp://localhost:61613', // optional
 	'username' => null, // optional
 	'password' => null, // optional
-),
+],
 ```
 
 ## License
