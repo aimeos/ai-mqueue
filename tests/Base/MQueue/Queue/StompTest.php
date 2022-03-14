@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Queue;
+namespace Aimeos\Base\MQueue\Queue;
 
 
 class StompTest extends \PHPUnit\Framework\TestCase
@@ -26,7 +26,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\MQueue\Queue\Stomp( $this->mock, 'test' );
+		$this->object = new \Aimeos\Base\MQueue\Queue\Stomp( $this->mock, 'test' );
 	}
 
 
@@ -41,8 +41,8 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'subscribe' )
 			->will( $this->returnValue( false ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
-		new \Aimeos\MW\MQueue\Queue\Stomp( $this->mock, 'test' );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
+		new \Aimeos\Base\MQueue\Queue\Stomp( $this->mock, 'test' );
 	}
 
 
@@ -59,7 +59,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'send' )
 			->will( $this->returnValue( false ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -67,7 +67,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testDel()
 	{
 		$msg = new \Stomp\Message( 'test' );
-		$message = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\Stomp( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'ack' );
 
@@ -78,12 +78,12 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testDelException()
 	{
 		$msg = new \Stomp\Message( 'test' );
-		$message = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\Stomp( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'ack' )
 			->will( $this->returnValue( false ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -98,7 +98,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 
@@ -119,7 +119,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->get();
 	}
 }

@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Queue;
+namespace Aimeos\Base\MQueue\Queue;
 
 
 class AMQPTest extends \PHPUnit\Framework\TestCase
@@ -26,7 +26,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\MQueue\Queue\AMQP( $this->mock, 'test' );
+		$this->object = new \Aimeos\Base\MQueue\Queue\AMQP( $this->mock, 'test' );
 	}
 
 
@@ -41,8 +41,8 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'queue_declare' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
-		new \Aimeos\MW\MQueue\Queue\AMQP( $this->mock, 'test' );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
+		new \Aimeos\Base\MQueue\Queue\AMQP( $this->mock, 'test' );
 	}
 
 
@@ -59,7 +59,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_publish' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -69,7 +69,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$msg = new \PhpAmqpLib\Message\AMQPMessage( 'test' );
 		$msg->delivery_info = array( 'channel' => $this->mock, 'delivery_tag' => 'test' );
 
-		$message = new \Aimeos\MW\MQueue\Message\AMQP( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\AMQP( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'basic_ack' );
 
@@ -82,12 +82,12 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$msg = new \PhpAmqpLib\Message\AMQPMessage( 'test' );
 		$msg->delivery_info = array( 'channel' => $this->mock, 'delivery_tag' => 'test' );
 
-		$message = new \Aimeos\MW\MQueue\Message\AMQP( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\AMQP( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'basic_ack' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -99,7 +99,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 
@@ -117,7 +117,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->get();
 	}
 }

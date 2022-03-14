@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ai-mqueue extension - custom library extensions" default="test">
+<project name="ai-mqueue extension" default="test">
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />

@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue;
+namespace Aimeos\Base\MQueue;
 
 
 class Beanstalk extends Base implements Iface
@@ -45,7 +45,7 @@ class Beanstalk extends Base implements Iface
 		}
 
 		if( $this->client instanceof \Pheanstalk\Exception ) {
-			throw new \Aimeos\MW\MQueue\Exception( $this->client->getMessage() );
+			throw new \Aimeos\Base\MQueue\Exception( $this->client->getMessage() );
 		}
 	}
 
@@ -54,14 +54,14 @@ class Beanstalk extends Base implements Iface
 	 * Returns the queue for the given name
 	 *
 	 * @param string $name Queue name
-	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue
+	 * @return \Aimeos\Base\MQueue\Queue\Iface Message queue
 	 */
-	public function getQueue( string $name ) : \Aimeos\MW\MQueue\Queue\Iface
+	public function getQueue( string $name ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
 		if( !isset( $this->queues[$name] ) )
 		{
 			$timeout = $this->getConfig( 'readtimeout', 30 );
-			$this->queues[$name] = new \Aimeos\MW\MQueue\Queue\Beanstalk( $this->client, $name, $timeout );
+			$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->client, $name, $timeout );
 		}
 
 		return $this->queues[$name];

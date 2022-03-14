@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue;
+namespace Aimeos\Base\MQueue;
 
 
 class BeanstalkTest extends \PHPUnit\Framework\TestCase
@@ -23,10 +23,10 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	{
 		try
 		{
-			$mqueue = new \Aimeos\MW\MQueue\Beanstalk( array( 'conntimeout' => 1, 'readtimeout' => 1 ) );
+			$mqueue = new \Aimeos\Base\MQueue\Beanstalk( array( 'conntimeout' => 1, 'readtimeout' => 1 ) );
 			$queue = $mqueue->getQueue( 'aimeos_unittest' );
 		}
-		catch( \Aimeos\MW\MQueue\Exception $e )
+		catch( \Aimeos\Base\MQueue\Exception $e )
 		{
 			$this->markTestSkipped( 'No Stomp compliant server available at "localhost"' );
 		}
@@ -41,24 +41,24 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 
 	public function testSingleConnection()
 	{
-		$object = new \Aimeos\MW\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Iface::class, $object );
+		$object = new \Aimeos\Base\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Iface::class, $object );
 	}
 
 
 	public function testMultiConnection()
 	{
 		$config = array( 'host' => array( '192.168.254.255', '192.168.255.255' ),  'conntimeout' => 1 );
-		$object = new \Aimeos\MW\MQueue\Beanstalk( $config );
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Iface::class, $object );
+		$object = new \Aimeos\Base\MQueue\Beanstalk( $config );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Iface::class, $object );
 	}
 
 
 	public function testGetQueue()
 	{
-		$object = new \Aimeos\MW\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
+		$object = new \Aimeos\Base\MQueue\Beanstalk( array( 'host' => '192.168.255.255',  'conntimeout' => 1 ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 }

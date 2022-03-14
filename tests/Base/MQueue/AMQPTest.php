@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue;
+namespace Aimeos\Base\MQueue;
 
 
 class AMQPTest extends \PHPUnit\Framework\TestCase
@@ -23,10 +23,10 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	{
 		try
 		{
-			$mqueue = new \Aimeos\MW\MQueue\AMQP( array( 'host' => 'localhost' ) );
+			$mqueue = new \Aimeos\Base\MQueue\AMQP( array( 'host' => 'localhost' ) );
 			$queue = $mqueue->getQueue( 'aimeos_unittest' );
 		}
-		catch( \Aimeos\MW\MQueue\Exception $e )
+		catch( \Aimeos\Base\MQueue\Exception $e )
 		{
 			$this->markTestSkipped( 'No AMQP compliant server available at "localhost"' );
 		}
@@ -41,15 +41,15 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 
 	public function testSingleConnection()
 	{
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
-		new \Aimeos\MW\MQueue\AMQP( array( 'host' => '192.168.255.255', 'connection_timeout' => 0.1 ) );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
+		new \Aimeos\Base\MQueue\AMQP( array( 'host' => '192.168.255.255', 'connection_timeout' => 0.1 ) );
 	}
 
 
 	public function testMultiConnection()
 	{
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
-		new \Aimeos\MW\MQueue\AMQP( array( 'host' => array( '192.168.254.255', '192.168.255.255' ), 'connection_timeout' => 0.1 ) );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
+		new \Aimeos\Base\MQueue\AMQP( array( 'host' => array( '192.168.254.255', '192.168.255.255' ), 'connection_timeout' => 0.1 ) );
 	}
 
 
@@ -59,7 +59,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$object = $this->getMockBuilder( \Aimeos\MW\MQueue\AMQP::class )
+		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\AMQP::class )
 			->setMethods( array( 'getChannel', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -67,13 +67,13 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getChannel' )
 			->will( $this->returnValue( $channel ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
 	}
 
 
 	public function testGetQueueException()
 	{
-		$object = $this->getMockBuilder( \Aimeos\MW\MQueue\AMQP::class )
+		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\AMQP::class )
 			->setMethods( array( 'getChannel', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -81,7 +81,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getChannel' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 }

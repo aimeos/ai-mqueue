@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Message;
+namespace Aimeos\Base\MQueue\Message;
 
 
 class BeanstalkTest extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$msg = new \Pheanstalk\Job( 1, 'test' );
-		$this->object = new \Aimeos\MW\MQueue\Message\Beanstalk( $msg );
+		$this->object = new \Aimeos\Base\MQueue\Message\Beanstalk( $msg );
 	}
 
 

@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Message;
+namespace Aimeos\Base\MQueue\Message;
 
 
 class StompTest extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$msg = new \Stomp\Message( 'test' );
-		$this->object = new \Aimeos\MW\MQueue\Message\Stomp( $msg );
+		$this->object = new \Aimeos\Base\MQueue\Message\Stomp( $msg );
 	}
 
 

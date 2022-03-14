@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Message;
+namespace Aimeos\Base\MQueue\Message;
 
 
 class AMQPTest extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$msg = new \PhpAmqpLib\Message\AMQPMessage( 'test' );
-		$this->object = new \Aimeos\MW\MQueue\Message\AMQP( $msg );
+		$this->object = new \Aimeos\Base\MQueue\Message\AMQP( $msg );
 	}
 
 

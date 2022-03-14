@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue;
+namespace Aimeos\Base\MQueue;
 
 
 class StompTest extends \PHPUnit\Framework\TestCase
@@ -24,10 +24,10 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		try
 		{
 			$config = array( 'username' => 'guest', 'password' => 'guest' );
-			$mqueue = new \Aimeos\MW\MQueue\Stomp( $config );
+			$mqueue = new \Aimeos\Base\MQueue\Stomp( $config );
 			$queue = $mqueue->getQueue( 'aimeos_unittest' );
 		}
-		catch( \Aimeos\MW\MQueue\Exception $e )
+		catch( \Aimeos\Base\MQueue\Exception $e )
 		{
 			$this->markTestSkipped( 'No Stomp compliant server available at "localhost"' );
 		}
@@ -42,9 +42,9 @@ class StompTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetQueueException()
 	{
-		$object = new \Aimeos\MW\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
+		$object = new \Aimeos\Base\MQueue\Stomp( array( 'host' => 'tcp://127.0.0.1:61616' ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$object->getQueue( 'test' );
 	}
 
@@ -55,7 +55,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$object = $this->getMockBuilder( \Aimeos\MW\MQueue\Stomp::class )
+		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\Stomp::class )
 			->setMethods( array( 'connect' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -63,6 +63,6 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'connect' )
 			->will( $this->returnValue( $client ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
 	}
 }

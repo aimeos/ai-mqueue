@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue;
+namespace Aimeos\Base\MQueue;
 
 
 class Stomp extends Base implements Iface
@@ -18,19 +18,19 @@ class Stomp extends Base implements Iface
 	 * Returns the queue for the given name
 	 *
 	 * @param string $name Queue name
-	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue
+	 * @return \Aimeos\Base\MQueue\Queue\Iface Message queue
 	 */
-	public function getQueue( string $name ) : \Aimeos\MW\MQueue\Queue\Iface
+	public function getQueue( string $name ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
 		if( !isset( $this->queues[$name] ) )
 		{
 			try {
 				$client = $this->connect();
 			} catch( \Exception $e ) {
-				throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
+				throw new \Aimeos\Base\MQueue\Exception( $e->getMessage() );
 			}
 
-			$this->queues[$name] = new \Aimeos\MW\MQueue\Queue\Stomp( $client, $name );
+			$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\Stomp( $client, $name );
 		}
 
 		return $this->queues[$name];

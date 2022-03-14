@@ -6,22 +6,22 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Message;
+namespace Aimeos\Base\MQueue\Message;
 
 
-class Stomp implements Iface
+class Beanstalk implements Iface
 {
-	private $msg;
+	private $job;
 
 
 	/**
 	 * Initializes the message object
 	 *
-	 * @param \Stomp\Message $msg Stomp message object
+	 * @param \Pheanstalk\Job $job Job object
 	 */
-	public function __construct( \Stomp\Message $msg )
+	public function __construct( \Pheanstalk\Job $job )
 	{
-		$this->msg = $msg;
+		$this->job = $job;
 	}
 
 
@@ -32,17 +32,17 @@ class Stomp implements Iface
 	 */
 	public function getBody() : string
 	{
-		return $this->msg->body;
+		return $this->job->getData();
 	}
 
 
 	/**
 	 * Returns the original message object
 	 *
-	 * @return \Stomp\Message Stomp message object
+	 * @return \Pheanstalk\Job Job object
 	 */
-	public function object() : \Stomp\Message
+	public function object() : \Pheanstalk\Job
 	{
-		return $this->msg;
+		return $this->job;
 	}
 }

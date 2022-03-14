@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\MQueue\Queue;
+namespace Aimeos\Base\MQueue\Queue;
 
 
 class BeanstalkTest extends \PHPUnit\Framework\TestCase
@@ -29,7 +29,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->any() )->method( 'useTube' )
 			->will( $this->returnValue( $this->mock ) );
 
-		$this->object = new \Aimeos\MW\MQueue\Queue\Beanstalk( $this->mock, 'test' );
+		$this->object = new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->mock, 'test' );
 	}
 
 
@@ -44,8 +44,8 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'watch' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
-		new \Aimeos\MW\MQueue\Queue\Beanstalk( $this->mock, 'test' );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
+		new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->mock, 'test' );
 	}
 
 
@@ -62,7 +62,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->add( 'test' );
 	}
 
@@ -70,7 +70,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	public function testDel()
 	{
 		$msg = new \Pheanstalk\Job( 1, 'test' );
-		$message = new \Aimeos\MW\MQueue\Message\Beanstalk( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\Beanstalk( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'delete' );
 
@@ -81,12 +81,12 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	public function testDelException()
 	{
 		$msg = new \Pheanstalk\Job( 1, 'test' );
-		$message = new \Aimeos\MW\MQueue\Message\Beanstalk( $msg );
+		$message = new \Aimeos\Base\MQueue\Message\Beanstalk( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'delete' )
 			->will( $this->throwException( new \Pheanstalk\Exception() ) );
 
-		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->del( $message );
 	}
 
@@ -98,7 +98,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'reserve' )
 			->will( $this->returnValue( $msg ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $this->object->get() );
+		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
 
 
