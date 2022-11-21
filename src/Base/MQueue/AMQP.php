@@ -24,10 +24,10 @@ class AMQP extends Base implements Iface
 	{
 		parent::__construct( $config );
 
-		$host = $this->getConfig( 'host', 'localhost' );
-		$port = $this->getConfig( 'port', 5672 );
-		$user = $this->getConfig( 'username', 'guest' );
-		$pass = $this->getConfig( 'password', 'guest' );
+		$host = $this->config( 'host', 'localhost' );
+		$port = $this->config( 'port', 5672 );
+		$user = $this->config( 'username', 'guest' );
+		$pass = $this->config( 'password', 'guest' );
 
 		if( is_array( $host ) )
 		{
@@ -98,15 +98,15 @@ class AMQP extends Base implements Iface
 	 */
 	protected function connect( string $host, int $port, string $user, string $pass )
 	{
-		$vhost = $this->getConfig( 'vhost', '/' );
-		$insist = $this->getConfig( 'insist', false );
-		$loginMethod = $this->getConfig( 'login_method', 'AMQPLAIN' );
-		$loginResponse = $this->getConfig( 'login_response', null );
-		$locale = $this->getConfig( 'locale', 'en_US' );
-		$conntimeout = $this->getConfig( 'connection_timeout', 3.0 );
-		$timeout = $this->getConfig( 'read_write_timeout', 3.0 );
-		$keepalive = $this->getConfig( 'keepalive', false );
-		$heartbeat = $this->getConfig( 'heartbeat', 0 );
+		$vhost = $this->config( 'vhost', '/' );
+		$insist = $this->config( 'insist', false );
+		$loginMethod = $this->config( 'login_method', 'AMQPLAIN' );
+		$loginResponse = $this->config( 'login_response', null );
+		$locale = $this->config( 'locale', 'en_US' );
+		$conntimeout = $this->config( 'connection_timeout', 3.0 );
+		$timeout = $this->config( 'read_write_timeout', 3.0 );
+		$keepalive = $this->config( 'keepalive', false );
+		$heartbeat = $this->config( 'heartbeat', 0 );
 
 		try
 		{

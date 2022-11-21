@@ -44,9 +44,9 @@ class Stomp extends Base implements Iface
 	 */
 	protected function connect()
 	{
-		$uri = $this->getConfig( 'uri', 'tcp://localhost:61613' );
-		$user = $this->getConfig( 'username', null );
-		$pass = $this->getConfig( 'password', null );
+		$uri = $this->config( 'uri', 'tcp://localhost:61613' );
+		$user = $this->config( 'username', null );
+		$pass = $this->config( 'password', null );
 
 		$stomp = new \Stomp\Stomp( $uri );
 		$stomp->connect( $user, $pass );

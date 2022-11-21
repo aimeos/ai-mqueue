@@ -24,8 +24,8 @@ class Beanstalk extends Base implements Iface
 	{
 		parent::__construct( $config );
 
-		$host = $this->getConfig( 'host', 'localhost' );
-		$port = $this->getConfig( 'port', \Pheanstalk\PheanstalkInterface::DEFAULT_PORT );
+		$host = $this->config( 'host', 'localhost' );
+		$port = $this->config( 'port', \Pheanstalk\PheanstalkInterface::DEFAULT_PORT );
 
 		if( is_array( $host ) )
 		{
@@ -60,7 +60,7 @@ class Beanstalk extends Base implements Iface
 	{
 		if( !isset( $this->queues[$name] ) )
 		{
-			$timeout = $this->getConfig( 'readtimeout', 30 );
+			$timeout = $this->config( 'readtimeout', 30 );
 			$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->client, $name, $timeout );
 		}
 
@@ -77,8 +77,8 @@ class Beanstalk extends Base implements Iface
 	 */
 	protected function connect( string $host, int $port ) : \Pheanstalk\PheanstalkInterface
 	{
-		$conntimeout = $this->getConfig( 'conntimeout', 3 );
-		$persist = $this->getConfig( 'persist', false );
+		$conntimeout = $this->config( 'conntimeout', 3 );
+		$persist = $this->config( 'persist', false );
 
 		return new \Pheanstalk\Pheanstalk( $host, $port, $conntimeout, $persist );
 	}
