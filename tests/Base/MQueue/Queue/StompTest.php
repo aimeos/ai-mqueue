@@ -22,7 +22,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( \Stomp\Stomp::class )
-			->setMethods( array( 'subscribe', 'unsubscribe', 'send', 'ack', 'hasFrameToRead', 'readFrame', '__destruct' ) )
+			->onlyMethods( array( 'subscribe', 'unsubscribe', 'send', 'ack', 'hasFrameToRead', 'readFrame', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 

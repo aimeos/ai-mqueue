@@ -22,7 +22,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( \Pheanstalk\Pheanstalk::class )
-			->setMethods( array( 'useTube', 'watch', 'put', 'delete', 'reserve' ) )
+			->onlyMethods( array( 'useTube', 'watch', 'put', 'delete', 'reserve' ) )
 			->disableOriginalConstructor()
 			->getMock();
 

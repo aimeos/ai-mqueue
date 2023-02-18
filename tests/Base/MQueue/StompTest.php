@@ -56,7 +56,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\Stomp::class )
-			->setMethods( array( 'connect' ) )
+			->onlyMethods( array( 'connect' ) )
 			->disableOriginalConstructor()
 			->getMock();
 

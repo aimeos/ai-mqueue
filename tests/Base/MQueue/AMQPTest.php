@@ -60,7 +60,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\AMQP::class )
-			->setMethods( array( 'getChannel', '__destruct' ) )
+			->onlyMethods( array( 'getChannel', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -74,7 +74,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	public function testGetQueueException()
 	{
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\AMQP::class )
-			->setMethods( array( 'getChannel', '__destruct' ) )
+			->onlyMethods( array( 'getChannel', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 

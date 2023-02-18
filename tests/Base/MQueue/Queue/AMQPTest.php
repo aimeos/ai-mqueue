@@ -22,7 +22,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( \PhpAmqpLib\Channel\AMQPChannel::class )
-			->setMethods( array( 'queue_declare', 'basic_qos', 'basic_publish', 'basic_get', 'basic_ack', 'close' ) )
+			->onlyMethods( array( 'queue_declare', 'basic_qos', 'basic_publish', 'basic_get', 'basic_ack', 'close' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
