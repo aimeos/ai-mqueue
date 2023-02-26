@@ -13,5 +13,4 @@
       <directory>Base/</directory>
     </testsuite>
   </testsuites>
-  <logging/>
 </phpunit>
