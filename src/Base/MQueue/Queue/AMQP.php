@@ -11,8 +11,8 @@ namespace Aimeos\Base\MQueue\Queue;
 
 class AMQP implements Iface
 {
-	private $channel;
-	private $queue;
+	private \PhpAmqpLib\Channel\AMQPChannel $channel;
+	private string $queue;
 
 
 	/**

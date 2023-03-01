@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue\Message;
 
 class Beanstalk implements Iface
 {
-	private $job;
+	private \Pheanstalk\Job $job;
 
 
 	/**

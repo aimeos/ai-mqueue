@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue\Message;
 
 class Stomp implements Iface
 {
-	private $msg;
+	private \Stomp\Message $msg;
 
 
 	/**

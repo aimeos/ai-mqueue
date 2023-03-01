@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue;
 
 class Stomp extends Base implements Iface
 {
-	private $queues = [];
+	private array $queues = [];
 
 
 	/**

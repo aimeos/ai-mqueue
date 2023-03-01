@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue\Message;
 
 class AMQP implements Iface
 {
-	private $msg;
+	private \PhpAmqpLib\Message\AMQPMessage $msg;
 
 
 	/**

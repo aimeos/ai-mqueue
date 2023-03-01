@@ -11,8 +11,8 @@ namespace Aimeos\Base\MQueue\Queue;
 
 class Stomp implements Iface
 {
-	private $client;
-	private $queue;
+	private \Stomp\Stomp $client;
+	private string $queue;
 
 
 	/**

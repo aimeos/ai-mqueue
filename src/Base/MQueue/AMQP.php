@@ -12,7 +12,7 @@ namespace Aimeos\Base\MQueue;
 class AMQP extends Base implements Iface
 {
 	private $conn;
-	private $queues = [];
+	private array $queues = [];
 
 
 	/**
