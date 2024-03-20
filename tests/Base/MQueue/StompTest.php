@@ -61,7 +61,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'connect' )
-			->will( $this->returnValue( $client ) );
+			->willReturn( $client );
 
 		$this->assertInstanceOf( \Aimeos\Base\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
 	}

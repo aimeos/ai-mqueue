@@ -97,7 +97,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 		$msg = new \PhpAmqpLib\Message\AMQPMessage( 'test' );
 
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
-			->will( $this->returnValue( $msg ) );
+			->willReturn( $msg );
 
 		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
@@ -106,7 +106,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	public function testGetNone()
 	{
 		$this->mock->expects( $this->once() )->method( 'basic_get' )
-			->will( $this->returnValue( null ) );
+			->willReturn( null );
 
 		$this->assertNull( $this->object->get() );
 	}

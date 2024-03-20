@@ -39,7 +39,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testConstructorException()
 	{
 		$this->mock->expects( $this->once() )->method( 'subscribe' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		new \Aimeos\Base\MQueue\Queue\Stomp( $this->mock, 'test' );
@@ -57,7 +57,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testAddException()
 	{
 		$this->mock->expects( $this->once() )->method( 'send' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->add( 'test' );
@@ -81,7 +81,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$message = new \Aimeos\Base\MQueue\Message\Stomp( $msg );
 
 		$this->mock->expects( $this->once() )->method( 'ack' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->expectException( \Aimeos\Base\MQueue\Exception::class );
 		$this->object->del( $message );
@@ -93,10 +93,10 @@ class StompTest extends \PHPUnit\Framework\TestCase
 		$msg = new \Stomp\Message( 'test' );
 
 		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
-			->will( $this->returnValue( $msg ) );
+			->willReturn( $msg );
 
 		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
@@ -105,7 +105,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testGetNone()
 	{
 		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->assertNull( $this->object->get() );
 	}
@@ -114,7 +114,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	public function testGetException()
 	{
 		$this->mock->expects( $this->once() )->method( 'hasFrameToRead' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->mock->expects( $this->once() )->method( 'readFrame' )
 			->will( $this->throwException( new \RuntimeException() ) );

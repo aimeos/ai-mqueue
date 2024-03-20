@@ -65,7 +65,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getChannel' )
-			->will( $this->returnValue( $channel ) );
+			->willReturn( $channel );
 
 		$this->assertInstanceOf( \Aimeos\Base\MQueue\Queue\Iface::class, $object->getQueue( 'test' ) );
 	}

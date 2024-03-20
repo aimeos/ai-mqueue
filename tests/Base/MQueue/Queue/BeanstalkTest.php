@@ -27,7 +27,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->mock->expects( $this->any() )->method( 'useTube' )
-			->will( $this->returnValue( $this->mock ) );
+			->willReturn( $this->mock );
 
 		$this->object = new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->mock, 'test' );
 	}
@@ -96,7 +96,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 		$msg = new \Pheanstalk\Job( 1, 'test' );
 
 		$this->mock->expects( $this->once() )->method( 'reserve' )
-			->will( $this->returnValue( $msg ) );
+			->willReturn( $msg );
 
 		$this->assertInstanceOf( \Aimeos\Base\MQueue\Message\Iface::class, $this->object->get() );
 	}
@@ -105,7 +105,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	public function testGetNone()
 	{
 		$this->mock->expects( $this->once() )->method( 'reserve' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$this->assertNull( $this->object->get() );
 	}
