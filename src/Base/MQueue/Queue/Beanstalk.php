@@ -24,7 +24,7 @@ class Beanstalk implements Iface
 	 * @param int $timeout Number of seconds until the message is passed to another client
 	 * @throws \Aimeos\Base\MQueue\Exception
 	 */
-	public function __construct( \Pheanstalk\PheanstalkInterface $client, string $queue, int $timeout = null )
+	public function __construct( \Pheanstalk\PheanstalkInterface $client, string $queue, ?int $timeout = null )
 	{
 		try {
 			$client->useTube( $queue )->watch( $queue );
