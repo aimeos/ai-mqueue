@@ -37,8 +37,14 @@ class StompTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetObject()
+	public function testObject()
 	{
 		$this->assertInstanceOf( \Stomp\Message::class, $this->object->object() );
+	}
+
+
+	public function testToString()
+	{
+		$this->assertEquals( 'test', (string) $this->object );
 	}
 }

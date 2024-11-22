@@ -37,8 +37,14 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetObject()
+	public function testObject()
 	{
 		$this->assertInstanceOf( \PhpAmqpLib\Message\AMQPMessage::class, $this->object->object() );
+	}
+
+
+	public function testToString()
+	{
+		$this->assertEquals( 'test', (string) $this->object );
 	}
 }

@@ -37,8 +37,14 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetObject()
+	public function testObject()
 	{
 		$this->assertInstanceOf( \Pheanstalk\Job::class, $this->object->object() );
+	}
+
+
+	public function testToString()
+	{
+		$this->assertEquals( 'test', (string) $this->object );
 	}
 }

@@ -45,4 +45,15 @@ class Stomp implements Iface
 	{
 		return $this->msg;
 	}
+
+
+	/**
+	 * Returns the message body
+	 *
+	 * @return string Message body
+	 */
+	public function __toString() : string
+	{
+		return $this->msg->body;
+	}
 }
