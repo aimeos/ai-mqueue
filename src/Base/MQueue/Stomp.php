@@ -40,7 +40,7 @@ class Stomp extends Base implements Iface
 	/**
 	 * Creates a connection to the Stomp server
 	 *
-	 * @return \Stomp\Stomp Stomp client
+	 * @return \Stomp\StatefulStomp Stomp client
 	 */
 	protected function connect()
 	{
@@ -48,9 +48,14 @@ class Stomp extends Base implements Iface
 		$user = $this->config( 'username', null );
 		$pass = $this->config( 'password', null );
 
-		$stomp = new \Stomp\Stomp( $uri );
-		$stomp->connect( $user, $pass );
+		$client = new \Stomp\Client( $uri );
 
-		return $stomp;
+		if( $user !== null || $pass !== null ) {
+			$client->setLogin( (string) $user, (string) $pass );
+		}
+
+		$client->connect();
+
+		return new \Stomp\StatefulStomp( $client );
 	}
 }

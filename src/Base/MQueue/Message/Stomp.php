@@ -11,15 +11,15 @@ namespace Aimeos\Base\MQueue\Message;
 
 class Stomp implements Iface
 {
-	private \Stomp\Message $msg;
+	private \Stomp\Transport\Frame $msg;
 
 
 	/**
 	 * Initializes the message object
 	 *
-	 * @param \Stomp\Message $msg Stomp message object
+	 * @param \Stomp\Transport\Frame $msg Stomp frame object
 	 */
-	public function __construct( \Stomp\Message $msg )
+	public function __construct( \Stomp\Transport\Frame $msg )
 	{
 		$this->msg = $msg;
 	}
@@ -39,9 +39,9 @@ class Stomp implements Iface
 	/**
 	 * Returns the original message object
 	 *
-	 * @return \Stomp\Message Stomp message object
+	 * @return \Stomp\Transport\Frame Stomp frame object
 	 */
-	public function object() : \Stomp\Message
+	public function object() : \Stomp\Transport\Frame
 	{
 		return $this->msg;
 	}

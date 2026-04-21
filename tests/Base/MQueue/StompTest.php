@@ -13,7 +13,7 @@ class StompTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp() : void
 	{
-		if( class_exists( '\Stomp\Stomp' ) === false ) {
+		if( class_exists( '\Stomp\StatefulStomp' ) === false ) {
 			$this->markTestSkipped( 'Please install the "stomp-php" composer package first' );
 		}
 	}
@@ -51,9 +51,12 @@ class StompTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetQueue()
 	{
-		$client = $this->getMockBuilder( \Stomp\Stomp::class )
+		$client = $this->getMockBuilder( \Stomp\StatefulStomp::class )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$client->expects( $this->any() )->method( 'subscribe' )
+			->willReturn( 1 );
 
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\Stomp::class )
 			->onlyMethods( array( 'connect' ) )
