@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue;
 
 class Beanstalk extends Base implements Iface
 {
-	private \Pheanstalk\PheanstalkInterface $client;
+	private \Pheanstalk\Pheanstalk $client;
 	private array $queues = [];
 
 
@@ -25,7 +25,7 @@ class Beanstalk extends Base implements Iface
 		parent::__construct( $config );
 
 		$host = $this->config( 'host', 'localhost' );
-		$port = $this->config( 'port', \Pheanstalk\PheanstalkInterface::DEFAULT_PORT );
+		$port = $this->config( 'port', 11300 );
 
 		if( is_array( $host ) )
 		{
@@ -34,7 +34,7 @@ class Beanstalk extends Base implements Iface
 				$iport = ( is_array( $port) ? $port[$idx] : $port );
 				$this->client = $this->connect( $entry, $iport );
 
-				if( $this->client instanceof \Pheanstalk\PheanstalkInterface ) {
+				if( $this->client instanceof \Pheanstalk\Pheanstalk ) {
 					break;
 				}
 			}
@@ -73,13 +73,12 @@ class Beanstalk extends Base implements Iface
 	 *
 	 * @param string $host Host name or IP address
 	 * @param int $port Port the server is listening
-	 * @return \Pheanstalk\PheanstalkInterface
+	 * @return \Pheanstalk\Pheanstalk
 	 */
-	protected function connect( string $host, int $port ) : \Pheanstalk\PheanstalkInterface
+	protected function connect( string $host, int $port ) : \Pheanstalk\Pheanstalk
 	{
 		$conntimeout = $this->config( 'conntimeout', 3 );
-		$persist = $this->config( 'persist', false );
 
-		return new \Pheanstalk\Pheanstalk( $host, $port, $conntimeout, $persist );
+		return \Pheanstalk\Pheanstalk::create( $host, $port, new \Pheanstalk\Values\Timeout( $conntimeout ) );
 	}
 }

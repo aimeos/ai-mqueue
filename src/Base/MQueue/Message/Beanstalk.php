@@ -11,15 +11,15 @@ namespace Aimeos\Base\MQueue\Message;
 
 class Beanstalk implements Iface
 {
-	private \Pheanstalk\Job $job;
+	private \Pheanstalk\Values\Job $job;
 
 
 	/**
 	 * Initializes the message object
 	 *
-	 * @param \Pheanstalk\Job $job Job object
+	 * @param \Pheanstalk\Values\Job $job Job object
 	 */
-	public function __construct( \Pheanstalk\Job $job )
+	public function __construct( \Pheanstalk\Values\Job $job )
 	{
 		$this->job = $job;
 	}
@@ -39,9 +39,9 @@ class Beanstalk implements Iface
 	/**
 	 * Returns the original message object
 	 *
-	 * @return \Pheanstalk\Job Job object
+	 * @return \Pheanstalk\Values\Job Job object
 	 */
-	public function object() : \Pheanstalk\Job
+	public function object() : \Pheanstalk\Values\Job
 	{
 		return $this->job;
 	}

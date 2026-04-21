@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue\Queue;
 
 class Beanstalk implements Iface
 {
-	private \Pheanstalk\PheanstalkInterface $client;
+	private object $client;
 	private string $queue;
 	private ?int $timeout;
 
@@ -19,15 +19,17 @@ class Beanstalk implements Iface
 	/**
 	 * Initializes the queue object
 	 *
-	 * @param \Pheanstalk\PheanstalkInterface $client Client object
+	 * @param \Pheanstalk\Pheanstalk $client Client object
 	 * @param string $queue Message queue name
 	 * @param int $timeout Number of seconds until the message is passed to another client
 	 * @throws \Aimeos\Base\MQueue\Exception
 	 */
-	public function __construct( \Pheanstalk\PheanstalkInterface $client, string $queue, ?int $timeout = null )
+	public function __construct( object $client, string $queue, ?int $timeout = null )
 	{
 		try {
-			$client->useTube( $queue )->watch( $queue );
+			$tube = new \Pheanstalk\Values\TubeName( $queue );
+			$client->useTube( $tube );
+			$client->watch( $tube );
 		} catch( \Exception $e ) {
 			throw new \Aimeos\Base\MQueue\Exception( $e->getMessage() );
 		}
@@ -81,7 +83,13 @@ class Beanstalk implements Iface
 	 */
 	public function get() : ?\Aimeos\Base\MQueue\Message\Iface
 	{
-		if( ( $job = $this->client->reserve( $this->timeout ) ) !== false ) {
+		if( $this->timeout !== null ) {
+			$job = $this->client->reserveWithTimeout( $this->timeout );
+		} else {
+			$job = $this->client->reserve();
+		}
+
+		if( $job !== null ) {
 			return new \Aimeos\Base\MQueue\Message\Beanstalk( $job );
 		}
 

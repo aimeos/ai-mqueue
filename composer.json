@@ -14,16 +14,16 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "^8.0.11",
+		"php": "^8.3",
 		"aimeos/aimeos-core": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~10.0||~11.0"
 	},
 	"suggest": {
-		"php-amqplib/php-amqplib": "AMQP message queue client for RabbitMQ, etc",
-		"pda/pheanstalk": "Beanstalk message queue client",
-		"stomp-php/stomp-php": "Stomp message queue client"
+		"php-amqplib/php-amqplib": "^3.0 AMQP message queue client for RabbitMQ, etc",
+		"pda/pheanstalk": "^8.0 Beanstalk message queue client",
+		"stomp-php/stomp-php": "^5.0 Stomp message queue client"
 	},
 	"autoload": {
 		"psr-4": {

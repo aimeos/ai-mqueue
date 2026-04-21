@@ -16,11 +16,11 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( class_exists( '\Pheanstalk\Job' ) === false ) {
+		if( class_exists( '\Pheanstalk\Values\Job' ) === false ) {
 			$this->markTestSkipped( 'Please install the "pheanstalk" library via composer first' );
 		}
 
-		$msg = new \Pheanstalk\Job( 1, 'test' );
+		$msg = new \Pheanstalk\Values\Job( new \Pheanstalk\Values\JobId( 1 ), 'test' );
 		$this->object = new \Aimeos\Base\MQueue\Message\Beanstalk( $msg );
 	}
 
@@ -39,7 +39,7 @@ class BeanstalkTest extends \PHPUnit\Framework\TestCase
 
 	public function testObject()
 	{
-		$this->assertInstanceOf( \Pheanstalk\Job::class, $this->object->object() );
+		$this->assertInstanceOf( \Pheanstalk\Values\Job::class, $this->object->object() );
 	}
 
 
