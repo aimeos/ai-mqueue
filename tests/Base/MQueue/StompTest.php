@@ -51,11 +51,9 @@ class StompTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetQueue()
 	{
-		$client = $this->getMockBuilder( \Stomp\StatefulStomp::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$client = $this->createStub( \Stomp\StatefulStomp::class );
 
-		$client->expects( $this->any() )->method( 'subscribe' )
+		$client->method( 'subscribe' )
 			->willReturn( 1 );
 
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\Stomp::class )

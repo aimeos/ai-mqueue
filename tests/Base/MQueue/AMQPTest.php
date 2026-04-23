@@ -55,9 +55,7 @@ class AMQPTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetQueue()
 	{
-		$channel = $this->getMockBuilder( 'PhpAmqpLib\Channel\AMQPChannel' )
-			->disableOriginalConstructor()
-			->getMock();
+		$channel = $this->createStub( \PhpAmqpLib\Channel\AMQPChannel::class );
 
 		$object = $this->getMockBuilder( \Aimeos\Base\MQueue\AMQP::class )
 			->onlyMethods( array( 'getChannel', '__destruct' ) )

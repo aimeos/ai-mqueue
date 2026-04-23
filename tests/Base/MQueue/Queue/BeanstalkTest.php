@@ -9,6 +9,7 @@
 namespace Aimeos\Base\MQueue\Queue;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class BeanstalkTest extends \PHPUnit\Framework\TestCase
 {
 	private $pubMock;
