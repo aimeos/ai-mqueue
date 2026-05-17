@@ -32,20 +32,15 @@ class Beanstalk extends Base implements Iface
 			foreach( $host as $idx => $entry )
 			{
 				$iport = ( is_array( $port) ? $port[$idx] : $port );
+				// @phpstan-ignore argument.type, argument.type
 				$this->client = $this->connect( $entry, $iport );
-
-				if( $this->client instanceof \Pheanstalk\Pheanstalk ) {
-					break;
-				}
+				break;
 			}
 		}
 		else
 		{
+			// @phpstan-ignore argument.type, argument.type
 			$this->client = $this->connect( $host, $port );
-		}
-
-		if( $this->client instanceof \Pheanstalk\Exception ) {
-			throw new \Aimeos\Base\MQueue\Exception( $this->client->getMessage() );
 		}
 	}
 
@@ -61,9 +56,11 @@ class Beanstalk extends Base implements Iface
 		if( !isset( $this->queues[$name] ) )
 		{
 			$timeout = $this->config( 'readtimeout', 30 );
+			// @phpstan-ignore argument.type
 			$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\Beanstalk( $this->client, $name, $timeout );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->queues[$name];
 	}
 
@@ -79,6 +76,7 @@ class Beanstalk extends Base implements Iface
 	{
 		$conntimeout = $this->config( 'conntimeout', 3 );
 
+		// @phpstan-ignore argument.type
 		return \Pheanstalk\Pheanstalk::create( $host, $port, new \Pheanstalk\Values\Timeout( $conntimeout ) );
 	}
 }

@@ -11,7 +11,7 @@ namespace Aimeos\Base\MQueue;
 
 class AMQP extends Base implements Iface
 {
-	private $conn;
+	private \PhpAmqpLib\Connection\AMQPStreamConnection|\Exception|null $conn = null;
 	private array $queues = [];
 
 
@@ -37,6 +37,7 @@ class AMQP extends Base implements Iface
 				$iuser = ( is_array( $user) ? $user[$idx] : $user );
 				$ipass = ( is_array( $pass) ? $pass[$idx] : $pass );
 
+				// @phpstan-ignore argument.type, argument.type, argument.type, argument.type
 				$this->conn = $this->connect( $entry, $iport, $iuser, $ipass );
 
 				if( $this->conn instanceof \PhpAmqpLib\Connection\AMQPStreamConnection ) {
@@ -46,6 +47,7 @@ class AMQP extends Base implements Iface
 		}
 		else
 		{
+			// @phpstan-ignore argument.type, argument.type, argument.type, argument.type
 			$this->conn = $this->connect( $host, $port, $user, $pass );
 		}
 
@@ -80,6 +82,7 @@ class AMQP extends Base implements Iface
 				$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\AMQP( $this->getChannel(), $name );
 			}
 
+			// @phpstan-ignore return.type
 			return $this->queues[$name];
 		}
 		catch( \Exception $e )

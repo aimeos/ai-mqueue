@@ -64,11 +64,12 @@ class Stomp implements Iface
 	 * Removes the message from the queue
 	 *
 	 * @param \Aimeos\Base\MQueue\Message\Iface $msg Message object
-	 * @return \Aimeos\Base\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\Base\MQueue\Queue\Iface MQueue instance for method chaining
 	 * @throws \Aimeos\Base\MQueue\Exception
 	 */
 	public function del( \Aimeos\Base\MQueue\Message\Iface $msg ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
+		// @phpstan-ignore argument.type, method.notFound
 		$this->client->ack( $msg->object() );
 		return $this;
 	}

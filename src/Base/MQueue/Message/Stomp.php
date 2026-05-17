@@ -32,7 +32,7 @@ class Stomp implements Iface
 	 */
 	public function getBody() : string
 	{
-		return $this->msg->body;
+		return (string) $this->msg->body;
 	}
 
 
@@ -54,6 +54,6 @@ class Stomp implements Iface
 	 */
 	public function __toString() : string
 	{
-		return $this->msg->body;
+		return (string) $this->msg->body;
 	}
 }

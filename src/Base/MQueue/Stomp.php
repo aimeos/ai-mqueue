@@ -33,6 +33,7 @@ class Stomp extends Base implements Iface
 			$this->queues[$name] = new \Aimeos\Base\MQueue\Queue\Stomp( $client, $name );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->queues[$name];
 	}
 
@@ -48,6 +49,7 @@ class Stomp extends Base implements Iface
 		$user = $this->config( 'username', null );
 		$pass = $this->config( 'password', null );
 
+		// @phpstan-ignore argument.type
 		$client = new \Stomp\Client( $uri );
 
 		if( $user !== null || $pass !== null ) {

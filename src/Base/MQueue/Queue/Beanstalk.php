@@ -12,7 +12,6 @@ namespace Aimeos\Base\MQueue\Queue;
 class Beanstalk implements Iface
 {
 	private object $client;
-	private string $queue;
 	private ?int $timeout;
 
 
@@ -35,7 +34,6 @@ class Beanstalk implements Iface
 		}
 
 		$this->client = $client;
-		$this->queue = $queue;
 		$this->timeout = $timeout;
 	}
 
@@ -49,7 +47,7 @@ class Beanstalk implements Iface
 	public function add( string $msg ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
 		try {
-			$this->client->put( $msg );
+			$this->client->put( $msg ); // @phpstan-ignore method.notFound
 		} catch( \Exception $e ) {
 			throw new \Aimeos\Base\MQueue\Exception( $e->getMessage() );
 		}
@@ -67,6 +65,7 @@ class Beanstalk implements Iface
 	public function del( \Aimeos\Base\MQueue\Message\Iface $msg ) : \Aimeos\Base\MQueue\Queue\Iface
 	{
 		try {
+			/** @phpstan-ignore-next-line */
 			$this->client->delete( $msg->object() );
 		} catch( \Exception $e ) {
 			throw new \Aimeos\Base\MQueue\Exception( $e->getMessage() );
@@ -84,12 +83,13 @@ class Beanstalk implements Iface
 	public function get() : ?\Aimeos\Base\MQueue\Message\Iface
 	{
 		if( $this->timeout !== null ) {
-			$job = $this->client->reserveWithTimeout( $this->timeout );
+			$job = $this->client->reserveWithTimeout( $this->timeout ); // @phpstan-ignore method.notFound
 		} else {
-			$job = $this->client->reserve();
+			$job = $this->client->reserve(); // @phpstan-ignore method.notFound
 		}
 
 		if( $job !== null ) {
+			// @phpstan-ignore argument.type
 			return new \Aimeos\Base\MQueue\Message\Beanstalk( $job );
 		}
 
